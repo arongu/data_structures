@@ -1,4 +1,4 @@
-package config_encryptor;
+package encryptor;
 
 import aes.AESEncryptDecrypt;
 import org.slf4j.Logger;

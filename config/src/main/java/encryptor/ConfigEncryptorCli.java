@@ -1,4 +1,4 @@
-package config_encryptor;
+package encryptor;
 
 import aes.AESEncryptDecrypt;
 import static aes.AESEncryptDecrypt.AESToolException;
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Tool to easily encrypt and decrypt key value pairs in configuration files.
  */
-public class CliConfigEncryptor {
+public class ConfigEncryptorCli {
     private static final String helpMessage =
             """
                     This tool encrypts 'ENC_' prefixed and decrypts 'AES_' prefixed key, value pairs in a config file with the given AES key.
@@ -84,7 +84,7 @@ public class CliConfigEncryptor {
     }
 
     public static void main(String[] args) {
-        final CliConfigEncryptor cli = new CliConfigEncryptor();
+        final ConfigEncryptorCli cli = new ConfigEncryptorCli();
         cli.readArguments(args);
 
         try {

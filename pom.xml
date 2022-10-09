@@ -20,7 +20,7 @@
     <!-- modules -->
     <modules>
         <module>aes</module>
-        <module>config_encryptor</module>
+        <module>config</module>
     </modules>
 
     <dependencyManagement>

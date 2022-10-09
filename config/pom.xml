@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>config_encrypter</artifactId>
+    <artifactId>config</artifactId>
 
     <dependencies>
         <dependency>
@@ -54,7 +54,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>config_encryptor.CliConfigEncryptor</mainClass>
+                            <mainClass>encryptor.ConfigEncryptorCli</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
