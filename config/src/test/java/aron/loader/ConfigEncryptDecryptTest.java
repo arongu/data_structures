@@ -1,4 +1,4 @@
-package loader;
+package aron.loader;
 
 import org.junit.jupiter.api.Test;
 

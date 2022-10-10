@@ -1,4 +1,4 @@
-package loader;
+package aron.loader;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,8 +19,8 @@ public class ConfigLoaderTest {
         final Properties properties = configLoader.getProperties();
 
 
-        assertEquals(properties.getProperty("app_node_name"), "test");
-        assertEquals(properties.getProperty("db_accounts_driver"), "org.postgresql.Driver");
-        assertEquals(properties.getProperty("db_accounts_password"), "usr123#");
+        assertEquals("test", properties.getProperty("app_node_name"));
+        assertEquals("org.postgresql.Driver", properties.getProperty("db_accounts_driver"));
+        assertEquals("usr123#", properties.getProperty("db_accounts_password"));
     }
 }

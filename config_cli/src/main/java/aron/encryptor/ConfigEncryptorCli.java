@@ -1,7 +1,7 @@
-package encryptor;
+package aron.encryptor;
 
-import aes.AESEncryptDecrypt;
-import static aes.AESEncryptDecrypt.AESToolException;
+import aron.aes.AESEncryptDecrypt;
+import static aron.aes.AESEncryptDecrypt.AESToolException;
 
 import javax.crypto.SecretKey;
 import java.io.BufferedWriter;
