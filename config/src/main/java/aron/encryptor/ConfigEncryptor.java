@@ -30,6 +30,7 @@ public final class ConfigEncryptor {
     private static final String messageDecrypted        = "[ DECRYPT, ADD ]   @ {}  '{}' = *****";
     private static final String messageDecryptionFailed = "[ DECRYPT FAILED ] @ {}  '{}' = '{}'";
     private static final String messageAdd              = "[ ADD ]            @ {}  '{}' = '{}'";
+    private static final String messageAddMask          = "[ ADD ]            @ {}  '{}' = *****";
     private static final String messageIgnore           = "[ IGNORE ]         @ {}  '{}'";
 
     private static final Pattern configLinePattern = Pattern.compile("^([a-zA-Z0-9-_]+)(\\s*)=(\\s*)(.+)$");
@@ -86,7 +87,8 @@ public final class ConfigEncryptor {
 
                     } else {
                         properties.put(k, v);
-                        logger.info(messageAdd, String.format("%03d" , lineNumber), k, v);
+                        if ( k.toLowerCase().contains("password") ) logger.info(messageAddMask, String.format("%03d" , lineNumber), k);
+                        else logger.info(messageAdd, String.format("%03d" , lineNumber), k, v);
                     }
 
                 } else {
