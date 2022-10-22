@@ -1,5 +1,6 @@
-package aron.loader;
+package aron.lib.config.loader;
 
+import aron.lib.config.lib.config.loader.ConfigLoader;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

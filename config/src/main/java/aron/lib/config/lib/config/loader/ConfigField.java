@@ -1,4 +1,4 @@
-package aron.loader;
+package aron.lib.config.lib.config.loader;
 
 import java.util.List;
 import java.util.Properties;

@@ -1,6 +1,6 @@
-package aron.loader;
+package aron.lib.config.lib.config.loader;
 
-import aron.encryptor.ConfigEncryptor;
+import aron.lib.config.lib.config.encryptor.ConfigEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

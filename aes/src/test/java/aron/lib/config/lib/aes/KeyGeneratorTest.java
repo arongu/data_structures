@@ -1,4 +1,4 @@
-package aron.aes;
+package aron.lib.config.lib.aes;
 
 import org.junit.jupiter.api.Test;
 

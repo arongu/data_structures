@@ -1,5 +1,6 @@
-package aron.encryptor;
+package aron.lib.config.encryptor;
 
+import aron.lib.config.lib.config.encryptor.ConfigEncryptor;
 import org.apache.commons.codec.binary.Hex;
 import org.junit.jupiter.api.Test;
 

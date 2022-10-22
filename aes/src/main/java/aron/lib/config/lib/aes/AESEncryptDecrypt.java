@@ -1,4 +1,4 @@
-package aron.aes;
+package aron.lib.config.lib.aes;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package aron.aes;
+package aron.lib.config.lib.aes;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;

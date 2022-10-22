@@ -1,6 +1,6 @@
-package aron.encryptor;
+package aron.lib.config.lib.config.encryptor;
 
-import aron.aes.AESEncryptDecrypt;
+import aron.lib.config.lib.aes.AESEncryptDecrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

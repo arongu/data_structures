@@ -1,7 +1,9 @@
-package aron.encryptor;
+package aron.lib.config.encryptor;
 
-import aron.aes.AESEncryptDecrypt;
-import static aron.aes.AESEncryptDecrypt.AESToolException;
+import aron.lib.config.lib.aes.AESEncryptDecrypt;
+import aron.lib.config.lib.config.encryptor.ConfigEncryptor;
+
+import static aron.lib.config.lib.aes.AESEncryptDecrypt.AESToolException;
 
 import javax.crypto.SecretKey;
 import java.io.BufferedWriter;

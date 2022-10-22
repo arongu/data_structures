@@ -1,4 +1,4 @@
-package aron.aes;
+package aron.lib.config.lib.aes;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
