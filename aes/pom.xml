@@ -5,16 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>aron</groupId>
+        <groupId>aron.library</groupId>
         <artifactId>library</artifactId>
         <version>1.0</version>
     </parent>
 
     <artifactId>aes</artifactId>
-    <version>1.0</version>
-    <name>aes</name>
     <packaging>jar</packaging>
-    <description>Supplementary classes for the business logic, which could work independently.</description>
+    <description>AES encryption library</description>
 
     <dependencies>
         <!-- logging -->

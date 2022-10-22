@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>aron</groupId>
+        <groupId>aron.library</groupId>
         <artifactId>library</artifactId>
         <version>1.0</version>
     </parent>
@@ -11,6 +11,7 @@
 
     <artifactId>config_cli</artifactId>
     <packaging>jar</packaging>
+    <description>Cli tool to for encrypted configuration files.</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,7 +20,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>aron</groupId>
+            <groupId>aron.library</groupId>
             <artifactId>config</artifactId>
             <version>1.0</version>
         </dependency>
