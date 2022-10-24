@@ -1,4 +1,4 @@
-package aron.library.configx.cli;
+package aron.library.config.cli;
 
 import aron.library.config.aes.AESEncryptDecrypt;
 import aron.library.config.encryptor.ConfigEncryptor;
@@ -18,18 +18,18 @@ import java.util.List;
  */
 public class ConfigEncryptorCli {
     private static final String helpMessage =
-            """
-                    This tool encrypts 'ENC_' prefixed and decrypts 'AES_' prefixed key, value pairs in a config file with the given AES key.
-                    The first line of the key file should store the AES key as a base64 string.
+"""
+This tool encrypts 'ENC_' prefixed and decrypts 'AES_' prefixed key, value pairs in a config file with the given AES key.
+The first line of the key file should store the AES key as a base64 string.
 
-                    To generate a CBC-AES-256 HMAC key run:
-                      java -jar cli.jar g|gen --password <password> --salt <salt> --save|-s <SAVE_TO>
-                      java -jar cli.jar   gen --password 'password' --salt 'abcdef0123456790' --save key.conf
+To generate a CBC-AES-256 HMAC key run:
+    java -jar cli.jar g|gen --password <password> --salt <salt> --save|-s <SAVE_TO>
+    java -jar cli.jar   gen --password 'password' --salt 'abcdef0123456790' --save key.conf
 
-                    Usage:
-                      java -jar cli.jar enc|e|dec|d --config-file|-c <CONFIG_FILE> --key-file|-k <KEY_FILE> --save|-s <SAVE_TO>
-                      java -jar cli.jar enc -c rawconfig.conf -k key.txt -s encrypted.conf
-                      java -jar cli.jar   d -c encrypted.conf -k key.txt -s decrypted.txt""";
+Usage:
+    java -jar cli.jar enc|e|dec|d --config-file|-c <CONFIG_FILE> --key-file|-k <KEY_FILE> --save|-s <SAVE_TO>
+    java -jar cli.jar enc -c rawconfig.conf -k key.txt -s encrypted.conf
+    java -jar cli.jar   d -c encrypted.conf -k key.txt -s decrypted.txt""";
 
 
     private String keyFile, configFile, saveTo;

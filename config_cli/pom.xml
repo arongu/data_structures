@@ -35,7 +35,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>aron.library.configx.cli.ConfigEncryptorCli</mainClass>
+                            <mainClass>aron.library.config.cli.ConfigEncryptorCli</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
