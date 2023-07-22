@@ -19,18 +19,27 @@ import java.util.List;
 public class ConfigEncryptorCli {
     private static final String helpMessage =
 """
-This tool encrypts 'ENC_' prefixed and decrypts 'AES_' prefixed key, value pairs in a config file with the given AES key.
-The first line of the key file should store the AES key as a base64 string.
+        This tool encrypts 'ENC_' prefixed and decrypts 'AES_' prefixed key, value pairs in a config file with the given AES key.
+        The first line of the key file should store the AES key as a base64 string.
 
-To generate a CBC-AES-256 HMAC key run:
-    java -jar cli.jar g|gen --password <password> --salt <salt> --iter <iterations> --save|-s <SAVE_TO>
-    java -jar cli.jar   gen --password 'password' --salt 'abcdef0123456790' --iter 500000 --save key.conf
+        To generate a CBC-AES-256 HMAC key run:
+            java -jar cli.jar g|gen --password <password> --salt <salt> --iter <iterations> --save|-s <SAVE_TO>
+            java -jar cli.jar   gen --password 'password' --salt 'abcdef0123456790' --iter 500000 --save key.conf
 
-Usage:
-    java -jar cli.jar enc|e|dec|d --config-file|-c <CONFIG_FILE> --key-file|-k <KEY_FILE> --save|-s <SAVE_TO>
-    java -jar cli.jar enc -c rawconfig.conf -k key.txt -s encrypted.conf
-    java -jar cli.jar   d -c encrypted.conf -k key.txt -s decrypted.txt""";
+        Usage:
+            java -jar cli.jar enc|e|dec|d --config-file|-c <CONFIG_FILE> --key-file|-k <KEY_FILE> --save|-s <SAVE_TO>
+            java -jar cli.jar enc -c rawconfig.conf -k key.txt -s encrypted.conf
+            java -jar cli.jar   d -c encrypted.conf -k key.txt -s decrypted.txt
 
+        Shortcuts (commands and switches):
+            g, e, d (generate/encrypt/decrypt)
+            --config-file -c
+            --key-file -k
+            --save, -s
+            --password -p
+            --iter -i
+            --salt -sa
+        """;
 
     private String keyFile, configFile, saveTo,
             command, password, salt;
@@ -42,7 +51,7 @@ Usage:
      * @param args Arguments passed from the command line.
      */
     public void readArguments(final String[] args) {
-        if ( args == null || args.length != 7) {
+        if ( args == null || args.length < 7) {
             System.err.println("Not enough arguments!\n");
             System.out.println(helpMessage);
             System.exit(1);
