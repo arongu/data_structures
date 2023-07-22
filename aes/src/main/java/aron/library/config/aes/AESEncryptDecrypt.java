@@ -37,7 +37,7 @@ public final class AESEncryptDecrypt {
      * @return SecretKeySpec that can be used for encryption/decryption.
      * @throws AESToolException Thrown when the password, hash is not sufficient to create the key.
      */
-    public static SecretKeySpec derive256BitAESKeyWithHmacSHA256(final String password, final String salt) throws AESToolException {
+    public static SecretKeySpec derive256BitAESKeyWithHmacSHA256(final String password, final String salt, final int iterations) throws AESToolException {
         if ( null == password ||
                 null == salt ||
                 0 == password.getBytes().length ||
@@ -48,7 +48,7 @@ public final class AESEncryptDecrypt {
         } else {
             try {
                 final SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-                final KeySpec spec = new PBEKeySpec(password.toCharArray(), salt.getBytes(), 250000, 256);
+                final KeySpec spec = new PBEKeySpec(password.toCharArray(), salt.getBytes(), iterations, 256);
                 final SecretKey key = factory.generateSecret(spec);
 
                 return new SecretKeySpec(key.getEncoded(), "AES");
