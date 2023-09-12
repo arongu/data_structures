@@ -34,22 +34,23 @@ public final class ConfigEncryptor {
     private static final String messageIgnore           = "[ IGNORE ]         @ {}  '{}'";
 
     private static final Pattern configLinePattern = Pattern.compile("^([a-zA-Z0-9-_]+)(\\s*)=(\\s*)(.+)$");
-    private static final Logger logger = LoggerFactory.getLogger(ConfigEncryptor.class);
+    private static final Logger  logger            = LoggerFactory.getLogger(ConfigEncryptor.class);
 
     /**
      * Opens the key file, reads the first line and returns the decoded AES key as a byte array.
+     *
      * @param path Key file path.
-     * Reads the first line of the file.
-     * Which must be the 256 bit AES key stored as base64 string.
+     *             Reads the first line of the file.
+     *             Which must be the 256 bit AES key stored as base64 string.
      */
-    public static SecretKey loadAESKeyFromFile(final String path) throws IOException {
-        try (final BufferedReader reader = new BufferedReader(new FileReader(path))) {
+    public static SecretKey loadAESKeyFromFile( final String path )
+    throws IOException {
+        try ( final BufferedReader reader = new BufferedReader(new FileReader(path)) ) {
             final String firstLine = reader.readLine();
             final byte[] byteArray = Base64.getDecoder().decode(firstLine);
 
             return new SecretKeySpec(byteArray, "AES");
-        }
-        catch (final IOException e){
+        } catch ( final IOException e ) {
             logger.error(e.getMessage());
             throw e;
         }
@@ -57,42 +58,47 @@ public final class ConfigEncryptor {
 
     /**
      * Loads an encrypted config file and returns the decrypted fields in a Properties object.
-     * @param key Decryption key.
+     *
+     * @param key  Decryption key.
      * @param path Encrypted config file path.
      */
-    public static Properties decryptConfig(final SecretKey key, final String path) throws IOException {
+    public static Properties decryptConfig( final SecretKey key, final String path )
+    throws IOException {
         try {
-            final List<String> allLines = Files.readAllLines(Paths.get(path));
-            final Properties properties = new Properties();
+            final List <String> allLines   = Files.readAllLines(Paths.get(path));
+            final Properties    properties = new Properties();
 
             int lineNumber = 1;
-            for (final String line : allLines) {
+            for ( final String line : allLines ) {
                 final Matcher m = configLinePattern.matcher(line);
 
-                if ( m.find()){
+                if ( m.find() ) {
                     final String k = m.group(1);
                     final String v = m.group(4);
 
-                    if ( v.startsWith(aesPrefix)) {
+                    if ( v.startsWith(aesPrefix) ) {
                         try {
                             final String cipherText = v.substring(aesPrefix.length());
-                            final String decrypted = AESEncryptDecrypt.decryptBase64CipherTextWithKeyToString(key, cipherText);
+                            final String decrypted  = AESEncryptDecrypt.decryptBase64CipherTextWithKeyToString(key, cipherText);
                             properties.put(k, decrypted);
-                            logger.info(messageDecrypted, String.format("%03d" , lineNumber), k);
+                            logger.info(messageDecrypted, String.format("%03d", lineNumber), k);
 
-                        } catch (final AESEncryptDecrypt.AESToolException e) {
+                        } catch ( final AESEncryptDecrypt.AESToolException e ) {
                             properties.put(k, "n/a");
-                            logger.error(messageDecryptionFailed, String.format("%03d" , lineNumber), k, v);
+                            logger.error(messageDecryptionFailed, String.format("%03d", lineNumber), k, v);
                         }
 
                     } else {
                         properties.put(k, v);
-                        if ( k.toLowerCase().contains("password") ) logger.info(messageAddMask, String.format("%03d" , lineNumber), k);
-                        else logger.info(messageAdd, String.format("%03d" , lineNumber), k, v);
+                        if ( k.toLowerCase().contains("password") ) {
+                            logger.info(messageAddMask, String.format("%03d", lineNumber), k);
+                        } else {
+                            logger.info(messageAdd, String.format("%03d", lineNumber), k, v);
+                        }
                     }
 
                 } else {
-                    logger.info(messageIgnore, String.format("%03d" , lineNumber), line);
+                    logger.info(messageIgnore, String.format("%03d", lineNumber), line);
                 }
 
                 lineNumber++;
@@ -108,33 +114,35 @@ public final class ConfigEncryptor {
 
     /**
      * Loads a config file and returns the encrypted lines in a List<String>
-     * @param key Encryption key.
+     *
+     * @param key  Encryption key.
      * @param path Config file path.
      */
-    public static List<String> encryptConfig(final SecretKey key, final String path) throws IOException {
+    public static List <String> encryptConfig( final SecretKey key, final String path )
+    throws IOException {
         try {
-            final List<String> lines = Files.readAllLines(Paths.get(path));
-            final List<String> encryptedLines = new LinkedList<>();
+            final List <String> lines          = Files.readAllLines(Paths.get(path));
+            final List <String> encryptedLines = new LinkedList <>();
 
             int lineNumber = 1;
-            for ( String line : lines) {
-                final Matcher m = configLinePattern.matcher(line);
-                String encryptedLine = line;
+            for ( String line : lines ) {
+                final Matcher m             = configLinePattern.matcher(line);
+                String        encryptedLine = line;
 
-                if ( m.find()) {
+                if ( m.find() ) {
                     final String k = m.group(1);
                     final String v = m.group(4);
 
-                    if ( v.startsWith(encPrefix)) {
+                    if ( v.startsWith(encPrefix) ) {
                         try {
-                            final String toEncrypt = v.substring(encPrefix.length());   // strings starting with ENC_
+                            final String toEncrypt      = v.substring(encPrefix.length());   // strings starting with ENC_
                             final String encryptedValue = aesPrefix + AESEncryptDecrypt.encryptStringWithKeyToBase64CipherText(key, toEncrypt); // AES_<...>
                             encryptedLine = m.group(1) + m.group(2) + "=" + m.group(3) + encryptedValue;
-                            logger.info(messageEncrypted, String.format("%03d" , lineNumber), k);
+                            logger.info(messageEncrypted, String.format("%03d", lineNumber), k);
 
-                        } catch (AESEncryptDecrypt.AESToolException e) {
+                        } catch ( AESEncryptDecrypt.AESToolException e ) {
                             encryptedLine += "n/a";
-                            logger.error(messageEncryptionFailed, String.format("%03d" , lineNumber), k);
+                            logger.error(messageEncryptionFailed, String.format("%03d", lineNumber), k);
                         }
                     }
                 }
@@ -145,7 +153,7 @@ public final class ConfigEncryptor {
 
             return encryptedLines;
 
-        } catch (final IOException e) {
+        } catch ( final IOException e ) {
             logger.error(e.getMessage());
             throw e;
         }
