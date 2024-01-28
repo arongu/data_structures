@@ -23,12 +23,6 @@ import java.util.List;
 public final class AESEncryptDecrypt {
     private static final Logger logger = LoggerFactory.getLogger(AESEncryptDecrypt.class);
 
-    public static class AESToolException extends Exception {
-        AESToolException(final String message) {
-            super(message);
-        }
-    }
-
     // NOTE if the iterationCount is changed, all the files need to be re-encrypted with a new key.
     /**
      * From a password, salt string derives a key using PBKDF2WithHmacSHA256 hash algorithm.

@@ -3,7 +3,7 @@ package aron.library.config.cli;
 import aron.library.config.aes.AESEncryptDecrypt;
 import aron.library.config.encryptor.ConfigEncryptor;
 
-import static aron.library.config.aes.AESEncryptDecrypt.AESToolException;
+import aron.library.config.aes.AESToolException;
 
 import javax.crypto.SecretKey;
 import java.io.BufferedWriter;

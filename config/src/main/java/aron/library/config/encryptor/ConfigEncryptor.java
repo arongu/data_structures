@@ -1,6 +1,7 @@
 package aron.library.config.encryptor;
 
 import aron.library.config.aes.AESEncryptDecrypt;
+import aron.library.config.aes.AESToolException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -83,7 +84,7 @@ public final class ConfigEncryptor {
                             properties.put(k, decrypted);
                             logger.info(messageDecrypted, String.format("%03d", lineNumber), k);
 
-                        } catch ( final AESEncryptDecrypt.AESToolException e ) {
+                        } catch ( final AESToolException e ) {
                             properties.put(k, "n/a");
                             logger.error(messageDecryptionFailed, String.format("%03d", lineNumber), k, v);
                         }
@@ -140,7 +141,7 @@ public final class ConfigEncryptor {
                             encryptedLine = m.group(1) + m.group(2) + "=" + m.group(3) + encryptedValue;
                             logger.info(messageEncrypted, String.format("%03d", lineNumber), k);
 
-                        } catch ( AESEncryptDecrypt.AESToolException e ) {
+                        } catch ( AESToolException e ) {
                             encryptedLine += "n/a";
                             logger.error(messageEncryptionFailed, String.format("%03d", lineNumber), k);
                         }
